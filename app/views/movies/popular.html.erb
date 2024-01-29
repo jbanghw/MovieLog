@@ -1,19 +1,25 @@
 <ul>
   <% @movies.each do |movie| %>
-    <div class="card mb-3" style="max-width: 540px;">
+    <div class="card w-75 mb-3">
       <div class="row g-0">
         <div class="col-md-4">
           <img src="<%= movie["image"] %>" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h5 class="card-title"><%= movie["fullTitle"] %></h5>
+            <h5 class="card-title">
+              <%= movie['fullTitle'] %>
+            </h5>
+            <br>
             <% casts = movie["crew"].split(", ") %>
-            <% casts.first(5).each do |cast| %>
+            <% casts.first(7).each do |cast| %>
               <p class="card-text">
                 <%= cast.to_s %>
               </p>
             <% end %>
+            <div style='position: absolute; bottom: 15px; right: 15px;' >
+            <%= link_to 'View More', '/movies/' + movie['id'], class: 'btn btn-secondary' %>
+            </div>
           </div>
         </div>
       </div>
