@@ -14,8 +14,13 @@
   </head>
 
   <body>
-    <%= render partial: "shared/navbar" %>
-    <div class="container" align="center" style="padding-top: 5px;">
+    <% if Current.user %>
+      <%= render partial: "shared/navbar_logged_in" %>
+    <% else %>
+      <%= render partial: "shared/navbar_logged_out" %>
+    <% end %>
+    <div class="container" align='center' style="padding-top: 5px;">
+      <%= render partial: 'shared/flash' %>
       <%= yield %>
     </div>
   </body>
