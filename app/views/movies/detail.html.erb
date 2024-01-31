@@ -1,1 +1,43 @@
-<%= @movie %>
+<div class="card w-90 mt-5 border-0">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="<%= @movie["image"] %>" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <div align='left'>
+          <h3 class="card-title mb-5">
+            <%= @movie['fullTitle'] %> (<%= @movie['contentRating'] %>)
+          </h3>
+          <h5 class='card-subtitle mb-4'>
+            Director(s): <%= @movie['directors'] %>
+          </h5>
+          <h5 class='card-subtitle mb-4'>
+            Starring: <%= @movie['stars'] %>
+          </h5>
+          <h5 class='card-subtitle mb-4'>
+            Release Date: <%= @movie['releaseDate'] %>
+          </h5>
+          <h5 class='card-subtitle mb-4'>
+            Genres: <%= @movie['genres'] %>
+          </h5>
+          <h5 class='card-subtitle mb-4'>
+            Runtime: <%= @movie['runtimeStr'] %>
+          </h5>
+          <p class='card-text'>
+            <%= @movie['plot'] %>
+          </p>
+        </div>
+        <div style='position: absolute; bottom: 15px; right: 15px;'>
+          <% if Current.user %>
+            <% if @added %>
+              <%= button_to 'Remove from list', remove_movie_path(user_id: Current.user.id, movie_id: @movie['id']), method: 'post', class: 'btn btn-secondary' %>
+            <% else %>
+              <%= button_to 'Add to list', add_movie_path(user_id: Current.user.id, movie_id: @movie['id'], title: @movie['fullTitle']), method: 'post', class: 'btn btn-secondary' %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

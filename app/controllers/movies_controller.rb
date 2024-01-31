@@ -13,5 +13,11 @@ class MoviesController < ApplicationController
     uri = URI('https://tv-api.com/en/API/Title/' + ENV['apiKey'] + '/' + params[:id])
     res = Net::HTTP::get_response(uri)
     @movie = JSON.parse(res.body) if res.is_a?(Net::HTTPSuccess)
+    @added = false
+    if Current.user
+      @added = MovieRecord.exists?(:user => Current.user, :movie_id => @movie['id'])
+    end
+  rescue
+    @movie = nil
   end
 end
