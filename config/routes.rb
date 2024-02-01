@@ -16,13 +16,10 @@ Rails.application.routes.draw do
 
   get 'movies', to: 'movies#popular'
   get 'movies/:id', to: 'movies#detail'
+  get 'search', to: 'movies#search'
 
   post 'add_movie', to: 'movie_records#create'
   post 'remove_movie', to: 'movie_records#destroy'
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
   root "movies#popular"

@@ -1,6 +1,6 @@
 <ul>
   <% @movies.each do |movie| %>
-    <div class="card w-75 mb-3">
+    <div class="card w-50 mb-3">
       <div class="row g-0">
         <div class="col-md-4">
           <img src="<%= movie["image"] %>" class="img-fluid rounded-start" alt="...">
@@ -8,15 +8,12 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title">
-              <%= movie['fullTitle'] %>
+              <%= movie['title'] %>
             </h5>
             <br>
-            <% casts = movie["crew"].split(", ") %>
-            <% casts.first(7).each do |cast| %>
-              <p class="card-text">
-                <%= cast.to_s %>
-              </p>
-            <% end %>
+            <p class="card-text">
+              <%= movie['description'] %>
+            </p>
             <div style='position: absolute; bottom: 15px; right: 15px;' >
               <%= link_to 'View More', '/movies/' + movie['id'], class: 'btn btn-secondary' %>
             </div>
