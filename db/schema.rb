@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_31_111300) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_02_123356) do
   create_table "movie_records", force: :cascade do |t|
     t.string "movie_id"
     t.boolean "watched"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_111300) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
     t.index ["user_id"], name: "index_movie_records_on_user_id"
   end
 
