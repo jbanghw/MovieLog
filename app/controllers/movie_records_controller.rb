@@ -22,7 +22,8 @@ class MovieRecordsController < ApplicationController
   end
 
   def index
-    @kekw = params[:kekw]
-    @movie_records = MovieRecord.my_movies
+    @filter = params[:filter]
+    @order = params[:order]
+    @movie_records = MovieRecord.my_movies(@filter, @order)
   end
 end

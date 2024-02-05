@@ -1,0 +1,11 @@
+<%= link_to 'All', profile_path(filter: 'all', order: @order) %>
+<br>
+<%= link_to 'Watched', profile_path(filter: 'watched', order: @order) %>
+<br>
+<%= link_to 'Unwatched', profile_path(filter: 'unwatched', order: @order) %>
+<br>
+<%= link_to 'Order', profile_path(filter: @filter, order: @order == 'desc' ? 'asc' : 'desc') %>
+<br>
+<% @movie_records.each do |movie_record| %>
+  <%= movie_record.title %><br>
+<% end %>
