@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'movies/:id', to: 'movies#detail'
   get 'search', to: 'movies#search'
 
+  get 'profile', to: 'movie_records#index'
+
   post 'add_movie', to: 'movie_records#create'
   post 'remove_movie', to: 'movie_records#destroy'
 

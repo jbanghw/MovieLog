@@ -33,7 +33,7 @@
             <% if @added %>
               <%= button_to 'Remove from list', remove_movie_path(user_id: Current.user.id, movie_id: @movie['id']), method: 'post', class: 'btn btn-secondary' %>
             <% else %>
-              <%= button_to 'Add to list', add_movie_path(user_id: Current.user.id, movie_id: @movie['id'], title: @movie['fullTitle']), method: 'post', class: 'btn btn-secondary' %>
+              <%= button_to 'Add to list', add_movie_path(user_id: Current.user.id, movie_id: @movie['id'], title: @movie['fullTitle'], image: @movie['image']), method: 'post', class: 'btn btn-secondary' %>
             <% end %>
           <% end %>
         </div>
