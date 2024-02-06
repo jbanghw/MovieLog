@@ -9,8 +9,12 @@ class MovieRecord < ApplicationRecord
   # Pagination
   paginates_per 10
 
-  def self.my_movies(filter, order)
+  def self.my_movies(filter, order, title)
     movies = MovieRecord.where('user_id = ?', Current.user)
+
+    if title
+      movies = movies.where('title LIKE ?', '%' + title + '%')
+    end
 
     if filter == 'watched'
       movies = movies.where('watched = ?', true)

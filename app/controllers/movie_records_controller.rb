@@ -24,6 +24,7 @@ class MovieRecordsController < ApplicationController
   def index
     @filter = params[:filter]
     @order = params[:order]
-    @movie_records = MovieRecord.my_movies(@filter, @order).page params[:page]
+    @title = params[:title]
+    @movie_records = MovieRecord.my_movies(@filter, @order, @title).page params[:page]
   end
 end

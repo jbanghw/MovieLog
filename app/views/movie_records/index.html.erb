@@ -1,3 +1,4 @@
+<!--
 <%= link_to 'All', profile_path(filter: 'all', order: @order) %>
 <br>
 <%= link_to 'Watched', profile_path(filter: 'watched', order: @order) %>
@@ -10,3 +11,35 @@
   <%= movie_record.title %><br>
 <% end %>
 <%= paginate @movie_records %>
+-->
+
+<div class='d-inline-flex justify-content-between w-100 py-5'>
+  <div class='btn-group'>
+    <%= link_to 'Watched', profile_path(filter: 'watched', order: @order, title: @title), class: @filter == 'watched' ? 'btn btn-secondary' : 'btn btn-outline-secondary' %>
+    <%= link_to 'All', profile_path(filter: 'all', order: @order, title: @title), class: @filter == 'all' ? 'btn btn-secondary' : 'btn btn-outline-secondary' %>
+    <%= link_to 'Not Watched', profile_path(filter: 'unwatched', order: @order, title: @title), class: @filter == 'unwatched' ? 'btn btn-secondary' : 'btn btn-outline-secondary' %>
+  </div>
+  <div>
+    search
+  </div>
+</div>
+<table class='table'>
+  <thead>
+
+  </thead>
+  <tbody>
+    <% @movie_records.each do |movie_record| %>
+      <tr>
+        <td>
+            <img src='<%= movie_record.image %>' class='img-fluid rounded-start' style='height: 100px;' alt='...'>
+        </td>
+        <td>
+          <%= movie_record.title %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div>
+  <%= paginate @movie_records %>
+</div>
