@@ -6,6 +6,9 @@ class MovieRecord < ApplicationRecord
   validates :title, presence: true
   validates_uniqueness_of :user, scope: :movie_id
 
+  # Pagination
+  paginates_per 10
+
   def self.my_movies(filter, order)
     movies = MovieRecord.where('user_id = ?', Current.user)
 

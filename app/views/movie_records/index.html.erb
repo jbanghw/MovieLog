@@ -9,3 +9,4 @@
 <% @movie_records.each do |movie_record| %>
   <%= movie_record.title %><br>
 <% end %>
+<%= paginate @movie_records %>
