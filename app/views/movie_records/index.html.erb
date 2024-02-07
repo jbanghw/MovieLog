@@ -12,29 +12,65 @@
 <% end %>
 <%= paginate @movie_records %>
 -->
-
 <div class='d-inline-flex justify-content-between w-100 py-5'>
   <div class='btn-group'>
     <%= link_to 'Watched', profile_path(filter: 'watched', order: @order, title: @title), class: @filter == 'watched' ? 'btn btn-secondary' : 'btn btn-outline-secondary' %>
     <%= link_to 'All', profile_path(filter: 'all', order: @order, title: @title), class: @filter == 'all' ? 'btn btn-secondary' : 'btn btn-outline-secondary' %>
     <%= link_to 'Not Watched', profile_path(filter: 'unwatched', order: @order, title: @title), class: @filter == 'unwatched' ? 'btn btn-secondary' : 'btn btn-outline-secondary' %>
   </div>
-  <div>
-    search
+  <div class='d-flex'>
+      <%= form_tag profile_path, method: :get, class: 'd-flex' do %>
+        <%= search_field_tag :title, params[:title], placeholder: 'Search', class: 'form-control me-2' %>
+        <%= hidden_field_tag :filter, @filter %>
+        <%= hidden_field_tag :order, @order %>
+        <%= submit_tag 'Search', class: 'btn btn-outline-success' %>
+      <% end %>
+      <div class='me-2'></div>
+      <%= link_to 'Clear', profile_path(filter: @filter, order: @order), class: 'btn btn-outline-danger' %>
   </div>
 </div>
-<table class='table'>
+<table class='table align-middle'>
   <thead>
-
+    <th>
+    </th>
+    <th>
+      Title
+    </th>
+    <th class='d-flex'>
+      Added Date
+      <div class='me-2'></div>
+      <%= link_to profile_path(filter: @filter, order: @order == 'desc' ? 'asc' : 'desc', title: @title) do %>
+        <% if @order == 'desc' %>
+          <i class="bi bi-arrow-down-circle"></i>
+        <% elsif %>
+          <i class="bi bi-arrow-up-circle"></i>
+        <% end %>
+      <% end %>
+    </th>
+    <th>
+      Watched
+    </th>
+    <th>
+      Remove
+    </th>
   </thead>
   <tbody>
     <% @movie_records.each do |movie_record| %>
       <tr>
         <td>
-            <img src='<%= movie_record.image %>' class='img-fluid rounded-start' style='height: 100px;' alt='...'>
+            <img src='<%= movie_record.image %>' class='img-fluid rounded-start' style='width: 50px;' alt='...'>
+        </td>
+        <td style='width: 50%'>
+          <%= link_to movie_record.title, '/movies/' + movie_record.movie_id %>
         </td>
         <td>
-          <%= movie_record.title %>
+          <%= movie_record.created_at.to_date %>
+        </td>
+        <td>
+          watched status
+        </td>
+        <td>
+          <%= button_to 'Remove', remove_movie_path(user_id: Current.user.id, movie_id: movie_record.movie_id), method: 'post', class: 'btn btn-outline-danger' %>
         </td>
       </tr>
     <% end %>
