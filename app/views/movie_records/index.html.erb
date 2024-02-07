@@ -67,10 +67,14 @@
           <%= movie_record.created_at.to_date %>
         </td>
         <td>
-          watched status
+          <% if movie_record.watched %>
+            <%= button_to 'Unwatch', update_movie_path(movie_id: movie_record.movie_id), method: 'patch', class: 'btn btn-outline-danger' %>
+          <% else %>
+            <%= button_to 'Watch', update_movie_path(movie_id: movie_record.movie_id), method: 'patch', class: 'btn btn-outline-primary' %>
+          <% end %>
         </td>
         <td>
-          <%= button_to 'Remove', remove_movie_path(user_id: Current.user.id, movie_id: movie_record.movie_id), method: 'post', class: 'btn btn-outline-danger' %>
+          <%= button_to 'Remove', remove_movie_path(movie_id: movie_record.movie_id), method: 'post', class: 'btn btn-outline-danger' %>
         </td>
       </tr>
     <% end %>

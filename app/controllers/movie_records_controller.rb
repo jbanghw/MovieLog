@@ -21,6 +21,19 @@ class MovieRecordsController < ApplicationController
     end
   end
 
+  def update
+    @movie_record = MovieRecord.find_by(:user => Current.user, :movie_id => params[:movie_id])
+
+    @movie_record.watched = !@movie_record.watched
+    if !@movie_record.watched
+      @movie_record.watched_date = nil
+    end
+
+    if @movie_record.save
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   def index
     @filter = params[:filter]
     @order = params[:order]

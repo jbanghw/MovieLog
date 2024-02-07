@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   post 'add_movie', to: 'movie_records#create'
   post 'remove_movie', to: 'movie_records#destroy'
+  patch 'update_movie', to: 'movie_records#update'
 
   # Defines the root path route ("/")
   root "movies#popular"
